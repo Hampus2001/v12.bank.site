@@ -1,29 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import mysql from "mysql2/promise";
 
 const app = express();
 const PORT = 4000;
-
-const pool = mysql.createPool({
-  user: "root",
-  password: "root",
-  host: "localhost",
-  database: "bank",
-  port: 3306,
-});
-
-async function query(sql, params) {
-  const [results] = await pool.execute(sql, params);
-  return results;
-}
-
-const sql = "INSERT INTO users (username, password) VALUES (?,?)";
-const params = ["Lena", "sommar"];
-const result = await query(sql, params);
-
-console.log("databas", result);
 
 // Middleware
 app.use(cors());
